@@ -11,21 +11,8 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
-    let y = prompt("What is your play?");
-    
-    y = String(y).toLowerCase();
-
-    if(y=="rock"){
-        return y = "rock";
-    }
-    else if(y=="paper"){
-        return y = "paper";
-    }
-    else{
-        return y = "scissors";
-    }
-}
+let humanScore = 0;
+let computerScore = 0;
 
 function playRound(humanChoice, computerChoice){
     if(humanChoice=="rock" && computerChoice=="scissors"){
@@ -65,8 +52,34 @@ function playRound(humanChoice, computerChoice){
     }
 }
 
-let humanScore = 0;
-let computerScore = 0;
+const buttons = document.querySelectorAll(".btn");
+let buttonChoice = "";
+let randomChoice = "";
+
+buttons.forEach(button => {
+    button.addEventListener("click", function(event){
+        buttonChoice = event.target.textContent.trim().toLowerCase();
+        randomChoice = getComputerChoice();
+        playRound(buttonChoice, randomChoice);
+    })
+})
+
+
+/*function getHumanChoice(){
+    let y = prompt("What is your play?");
+    
+    y = String(y).toLowerCase();
+
+    if(y=="rock"){
+        return y = "rock";
+    }
+    else if(y=="paper"){
+        return y = "paper";
+    }
+    else{
+        return y = "scissors";
+    }
+}
 
 for(let i=0; i<5; i++){
     const humanSelection = getHumanChoice();
@@ -74,4 +87,6 @@ for(let i=0; i<5; i++){
     playRound(humanSelection,computerSelection);
 }
 
+
 console.log("Game finished!");
+*/
