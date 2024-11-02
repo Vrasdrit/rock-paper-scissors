@@ -16,6 +16,7 @@ let computerScore = 0;
 const buttons = document.querySelectorAll(".btn");
 const result = document.querySelector(".result");
 const current = document.querySelector(".current");
+const endgame = document.querySelector(".endgame")
 let buttonChoice = "";
 let randomChoice = "";
 
@@ -47,6 +48,35 @@ function playRound(humanChoice, computerChoice){
     else{
         current.textContent = "It is a draw! No change in the score"
     }
+
+    if(humanScore == 5 || computerScore == 5){
+        endGame();
+    }
+}
+
+function endGame(){
+    if(humanScore == 5){
+        endgame.textContent = "Congrats! You win the game!"
+    }
+    else{
+        endgame.textContent = "Sorry but you lose!"
+    }
+    buttons.forEach(button => button.disabled = true);
+    const replayButton = document.createElement("button");
+    replayButton.classList.add("reply-btn")
+    endgame.append(replayButton);
+    replayButton.textContent = "Want to play again?"
+    replayButton.addEventListener("click", replayGame);
+}
+
+function replayGame(){
+    humanScore = 0;
+    computerScore = 0;
+    result.textContent = "";
+    current.textContent = "";
+    endgame.textContent = "";
+    buttons.forEach(button => button.disabled = false);
+    const replayButton = document.querySelector(".reply-btn");
 }
 
 buttons.forEach(button => {
